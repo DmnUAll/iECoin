@@ -11,7 +11,7 @@ import UIKit
 final class SplashScreenController: UIViewController {
 
     // MARK: - Properties and Initializers
-    private let splashView = SplashScreenView()
+    private let splashScreenView = SplashScreenView()
     private var presenter: SplashScreenPresenter?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -35,15 +35,15 @@ final class SplashScreenController: UIViewController {
 extension SplashScreenController {
 
     private func addSubviews() {
-        view.addSubview(splashView)
+        view.addSubview(splashScreenView)
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            splashView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            splashView.topAnchor.constraint(equalTo: view.topAnchor),
-            splashView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splashView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            splashScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            splashScreenView.topAnchor.constraint(equalTo: view.topAnchor),
+            splashScreenView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            splashScreenView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

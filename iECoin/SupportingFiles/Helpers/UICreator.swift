@@ -12,22 +12,42 @@ struct UICreator {
 
     static let shared = UICreator()
 
-//    func makeLabel(text: String? = nil,
-//                   font: UIFont?,
-//                   color: UIColor = .bbdbBlack,
-//                   alignment: NSTextAlignment = .center,
-//                   andNumberOfLines numberOfLines: Int = 0
-//    ) -> UILabel {
-//        let label = UILabel()
-//        label.font = font
-//        label.textColor = color
-//        label.textAlignment = alignment
-//        label.numberOfLines = numberOfLines
-//        label.adjustsFontSizeToFitWidth = true
-//        label.minimumScaleFactor = 0.7
-//        label.text = text
-//        return label
-//    }
+    func makeLabel(text: String? = nil,
+                   color: UIColor = .iecRed,
+                   alignment: NSTextAlignment = .center,
+                   andNumberOfLines numberOfLines: Int = 0
+    ) -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.appFont(.regular, withSize: 12)
+        label.textColor = color
+        label.textAlignment = alignment
+        label.numberOfLines = numberOfLines
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.7
+        label.text = text
+        return label
+    }
+
+    func makeTextField(withPlacegolder placeholder: String? = nil, isSecured: Bool = false) -> UITextField {
+        let textField = UITextField()
+        textField.layer.cornerRadius = 16
+        textField.layer.masksToBounds = true
+        textField.backgroundColor = .iecCream
+        textField.textColor = .iecPurpleDark
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.iecPurpleLight.withAlphaComponent(0.25)])
+        if let button = textField.value(forKey: "clearButton") as? UIButton {
+          button.tintColor = .iecPurpleDark
+          button.setImage(UIImage(systemName: "xmark.circle.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        }
+        textField.clearButtonMode = .whileEditing
+        textField.textAlignment = .center
+        if isSecured {
+            textField.isSecureTextEntry = true
+        }
+        return textField
+    }
 
     func makeImageView(withImageNamed imageName: String? = nil
     ) -> UIImageView {
@@ -40,28 +60,18 @@ struct UICreator {
         return imageView
     }
 
-//    func makeFilledButton(title: String,
-//                          subtitle: String,
-//                          backgroundColor: UIColor = .bbdbGray,
-//                          foregroundColor: UIColor = .bbdbBlack,
-//                          action: Selector,
-//                          identifier: String? = nil
-//    ) -> UIButton {
-//        var filled = UIButton.Configuration.filled()
-//        filled.buttonSize = .medium
-//        filled.baseBackgroundColor = backgroundColor
-//        filled.baseForegroundColor = foregroundColor
-//        filled.titleAlignment = .center
-//        filled.title = title
-//        filled.attributedTitle?.font = UIFont.appFont(.empty, withSize: UIScreen.screenHeight(dividedBy: 25))
-//        filled.subtitle = subtitle
-//        filled.attributedSubtitle?.font = UIFont.appFont(.filled, withSize: UIScreen.screenHeight(dividedBy: 40))
-//        let button = UIButton(configuration: filled, primaryAction: nil)
-//        button.layer.cornerRadius = UIScreen.screenHeight(dividedBy: 70)
-//        button.addTarget(self, action: action, for: .touchUpInside)
-//        button.accessibilityIdentifier = identifier
-//        return button
-//    }
+    func makeButton(withTitle title: String, andAction selector: Selector) -> UIButton {
+        let button = UIButton()
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.backgroundColor = .iecPurpleLight
+        button.tintColor = .iecCream
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont.appFont(.bold, withSize: 16)
+        button.addTarget(nil, action: selector, for: .touchUpInside)
+        return button
+    }
+
 //
 //    func makeTable(withCells cells: (type: UITableViewCell.Type, identifier: String)...) -> UITableView {
 //        let tableView = UITableView()
@@ -112,20 +122,20 @@ struct UICreator {
 //        return uiSwitch
 //    }
 //
-//    func makeStackView(axis: NSLayoutConstraint.Axis = .vertical,
-//                       alignment: UIStackView.Alignment = .fill,
-//                       distribution: UIStackView.Distribution = .fill,
-//                       backgroundColor: UIColor = .clear,
-//                       addingSpacing spacing: CGFloat = 4
-//    ) -> UIStackView {
-//        let stackView = UIStackView()
-//        stackView.axis = axis
-//        stackView.alignment = alignment
-//        stackView.distribution = distribution
-//        stackView.backgroundColor = backgroundColor
-//        stackView.spacing = spacing
-//        return stackView
-//    }
+    func makeStackView(axis: NSLayoutConstraint.Axis = .vertical,
+                       alignment: UIStackView.Alignment = .fill,
+                       distribution: UIStackView.Distribution = .fill,
+                       backgroundColor: UIColor = .clear,
+                       addingSpacing spacing: CGFloat = 4
+    ) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = axis
+        stackView.alignment = alignment
+        stackView.distribution = distribution
+        stackView.backgroundColor = backgroundColor
+        stackView.spacing = spacing
+        return stackView
+    }
 //
 //    func makeLabelStack(leadingText: String,
 //                        trailingText: String,

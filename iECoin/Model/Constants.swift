@@ -8,9 +8,8 @@
 import Foundation
 
 // MARK: - K
-// swiftlint: disable type_name
+// swiftlint:disable:next type_name
 struct K {
-// swiftlint: enable type_name
 
     // MARK: - ImagesNames
     struct ImagesNames {
