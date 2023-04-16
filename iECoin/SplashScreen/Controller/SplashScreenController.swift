@@ -23,11 +23,14 @@ final class SplashScreenController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setupConstraints()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter = SplashScreenPresenter(viewController: self)
+        /*
+        .asyncAfter was added to test the SplashScreen visibility.
+        If not needed - move the line from completion to viewDidAppear() method
+        */
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self else { return }
+            self.presenter = SplashScreenPresenter(viewController: self)
+        }
     }
 }
 

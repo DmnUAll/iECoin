@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  iECoin
+
+  Created by Илья Валито on 16.04.2023.
+  
+*/
+
+"LOGIN" = "Login";
+"PASSWORD" = "Password";
+"LOG_IN" = "Log In";
+"LOGIN_ERROR" = "Wrong Username or Password";
+"COINS_LIST" = "eCoins List";
+"LOGOUT_WARNING" = "Are you sure want to logout?";
+"LOG_OUT" = "Log Out";
+"CANCEL" = "Cancel";
+"INCREMENT_SORTING" = "Increment Sorting";
+"DECREMENT_SORTING" = "Decrement Sorting";
+"SORTING_SETTINGS" = "Sorting Settings";
+"NETWORK_ERROR" = "Network Error";
+"TRY_AGAIN" = "Try Again";

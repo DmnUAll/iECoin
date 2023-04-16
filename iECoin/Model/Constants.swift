@@ -16,4 +16,25 @@ struct K {
 
         static let splashLogo = "splashLogo"
     }
+
+    // MARK: - IconsNames
+    struct IconsNames {
+
+        static let sorting = "sortingIcon"
+        static let decrementSorting = "decrementSortingIcon"
+        static let incrementSorting = "incrementSortingIcon"
+        static let logout = "logoutIcon"
+    }
+
+    // MARK: - CellsIdentifiers
+    struct CellsIdentifiers {
+
+        static let coinInfo = "coinInfo"
+    }
+
+    // MARK: - Links
+    struct Links {
+
+        static let ecoinData = "coinInfo"
+    }
 }

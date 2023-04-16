@@ -24,15 +24,11 @@ final class LoginScreenController: UIViewController {
         view.addKeyboardHiddingFeature()
         addSubviews()
         setupConstraints()
+        presenter = LoginScreenPresenter(viewController: self)
+        loginScreenView.delegate = presenter
         loginScreenView.loginTextField.delegate = self
         loginScreenView.passwordTextField.delegate = self
         loginScreenView.errorLabel.isHidden = true
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter = LoginScreenPresenter(viewController: self)
-        loginScreenView.delegate = presenter
     }
 }
 

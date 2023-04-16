@@ -72,26 +72,23 @@ struct UICreator {
         return button
     }
 
-//
-//    func makeTable(withCells cells: (type: UITableViewCell.Type, identifier: String)...) -> UITableView {
-//        let tableView = UITableView()
-//        tableView.toAutolayout()
-//        for singleCell in cells {
-//            tableView.register(singleCell.type, forCellReuseIdentifier: singleCell.identifier)
-//        }
-//        tableView.backgroundColor = .clear
-//        tableView.isHidden = true
-//        tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
-//        return tableView
-//    }
-//
-//    func makeActivityIndicator(withColor color: UIColor) -> UIActivityIndicatorView {
-//        let activityIndicator = UIActivityIndicatorView()
-//        activityIndicator.toAutolayout()
-//        activityIndicator.hidesWhenStopped = true
-//        activityIndicator.color = color
-//        return activityIndicator
-//    }
+    func makeTable(withCells cells: (type: UITableViewCell.Type, identifier: String)...) -> UITableView {
+        let tableView = UITableView()
+        tableView.toAutolayout()
+        for singleCell in cells {
+            tableView.register(singleCell.type, forCellReuseIdentifier: singleCell.identifier)
+        }
+        tableView.backgroundColor = .clear
+        tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        return tableView
+    }
+
+    func makeActivityIndicator(withColor color: UIColor) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = color
+        return activityIndicator
+    }
 //
 //    func makeSearchBar() -> UISearchBar {
 //        let searchBar = UISearchBar()

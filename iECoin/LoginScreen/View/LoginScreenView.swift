@@ -18,10 +18,11 @@ final class LoginScreenView: UIView {
     // MARK: - Properties and Initializers
     weak var delegate: LoginScreenViewDelegate?
     private let stackView = UICreator.shared.makeStackView(alignment: .center, addingSpacing: 16)
-    let loginTextField = UICreator.shared.makeTextField(withPlacegolder: "Login")
-    let passwordTextField = UICreator.shared.makeTextField(withPlacegolder: "Password", isSecured: true)
-    let errorLabel = UICreator.shared.makeLabel(text: "Wrong username or Password")
-    let loginButton = UICreator.shared.makeButton(withTitle: "Login", andAction: #selector(loginButtonTapped))
+    let loginTextField = UICreator.shared.makeTextField(withPlacegolder: "LOGIN".localized)
+    let passwordTextField = UICreator.shared.makeTextField(withPlacegolder: "PASSWORD".localized, isSecured: true)
+    let errorLabel = UICreator.shared.makeLabel(text: "LOGIN_ERROR".localized)
+    let loginButton = UICreator.shared.makeButton(withTitle: "LOG_IN".localized,
+                                                  andAction: #selector(loginButtonTapped))
 
     override init(frame: CGRect) {
         super.init(frame: frame)

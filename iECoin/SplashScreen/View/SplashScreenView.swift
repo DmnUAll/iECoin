@@ -15,7 +15,7 @@ final class SplashScreenView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .iecPurpleDark
+        backgroundColor = .iecPurple
         configureLayout()
         addSubviews()
         setupConstraints()

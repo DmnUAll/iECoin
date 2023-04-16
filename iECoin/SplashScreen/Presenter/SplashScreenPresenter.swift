@@ -23,23 +23,14 @@ final class SplashScreenPresenter {
 extension SplashScreenPresenter {
 
     func checkIfLoggedIn() {
-        // next line was added to test the SplashScreen visability
-        sleep(1)
+        let keyWindow = UIApplication.shared.keyWindow
         let isLogged = UserDefaultsManager.shared.isUserLoggedIn
+        print(isLogged)
         if isLogged {
-            print(1)
+            keyWindow?.rootViewController = NavigationController(rootViewController: CoinsListScreenController())
         } else {
-            UIApplication.shared.windows.first?.rootViewController = LoginScreenController()
+            keyWindow?.rootViewController = LoginScreenController()
         }
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
-//        switch flowID {
-//        case .main:
-//            let nextVC = TabBarController()
-//
-//        case .auth:
-//            let nextVC = NavigationController(rootViewController: AuthViewController())
-//            UIApplication.shared.windows.first?.rootViewController = nextVC
-//        }
-//        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        keyWindow?.makeKeyAndVisible()
     }
 }

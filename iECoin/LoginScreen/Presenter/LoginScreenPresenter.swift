@@ -19,10 +19,6 @@ final class LoginScreenPresenter {
     }
 }
 
-// MARK: - Helpers
-extension LoginScreenPresenter {
-}
-
 // MARK: - LoginScrenViewDelegate
 extension LoginScreenPresenter: LoginScreenViewDelegate {
 
@@ -37,7 +33,9 @@ extension LoginScreenPresenter: LoginScreenViewDelegate {
             viewController?.showErrorLabel()
             return
         }
-        // TODO: Proceed to next screen logic needed
-        print("Logged in")
+        UserDefaultsManager.shared.updateLoginState()
+        let keyWindow = UIApplication.shared.keyWindow
+        keyWindow?.rootViewController = NavigationController(rootViewController: CoinsListScreenController())
+        keyWindow?.makeKeyAndVisible()
     }
 }
