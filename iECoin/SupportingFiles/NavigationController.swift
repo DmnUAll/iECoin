@@ -59,9 +59,10 @@ extension NavigationController {
 
     private func configureNavigationController() {
         let navBarAppearance = UINavigationBarAppearance()
+        navigationBar.topItem?.backButtonTitle = ""
         navBarAppearance.configureWithTransparentBackground()
         navBarAppearance.titleTextAttributes = [
-            .font: UIFont.appFont(.bold, withSize: 24),
+            .font: UIFont.appFont(.bold, withSize: 16),
             .foregroundColor: UIColor.iecCream
         ]
         navBarAppearance.titlePositionAdjustment.vertical = 5
@@ -69,8 +70,7 @@ extension NavigationController {
         navigationBar.standardAppearance = navBarAppearance
         navigationBar.scrollEdgeAppearance = navBarAppearance
         navigationBar.tintColor = .iecCream
-//        navigationBar.topItem?.title = navVCTitle
-        let iconSize = 48
+        let iconSize = 24
         let incrementSorting = UIAction(
             title: "INCREMENT_SORTING".localized,
             subtitle: nil,

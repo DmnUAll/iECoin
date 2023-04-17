@@ -19,3 +19,8 @@
 "SORTING_SETTINGS" = "Sorting Settings";
 "NETWORK_ERROR" = "Network Error";
 "TRY_AGAIN" = "Try Again";
+"NO_DATA" = "No Data";
+"ID" = "ID";
+"MINING_ALGORITHM" = "Mining algorithm";
+"PRICE" = "Price";
+"DETAILS" = "Details about";

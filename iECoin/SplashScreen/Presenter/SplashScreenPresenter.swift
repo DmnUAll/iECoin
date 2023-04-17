@@ -25,7 +25,6 @@ extension SplashScreenPresenter {
     func checkIfLoggedIn() {
         let keyWindow = UIApplication.shared.keyWindow
         let isLogged = UserDefaultsManager.shared.isUserLoggedIn
-        print(isLogged)
         if isLogged {
             keyWindow?.rootViewController = NavigationController(rootViewController: CoinsListScreenController())
         } else {

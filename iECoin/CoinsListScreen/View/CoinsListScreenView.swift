@@ -47,9 +47,9 @@ extension CoinsListScreenView {
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

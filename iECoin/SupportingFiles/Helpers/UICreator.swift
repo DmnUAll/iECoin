@@ -13,12 +13,13 @@ struct UICreator {
     static let shared = UICreator()
 
     func makeLabel(text: String? = nil,
-                   color: UIColor = .iecRed,
+                   font: UIFont = UIFont.appFont(.regular, withSize: 12),
+                   color: UIColor = .iecCream,
                    alignment: NSTextAlignment = .center,
                    andNumberOfLines numberOfLines: Int = 0
     ) -> UILabel {
         let label = UILabel()
-        label.font = UIFont.appFont(.regular, withSize: 12)
+        label.font = font
         label.textColor = color
         label.textAlignment = alignment
         label.numberOfLines = numberOfLines
@@ -80,6 +81,7 @@ struct UICreator {
         }
         tableView.backgroundColor = .clear
         tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        tableView.separatorStyle = .none
         return tableView
     }
 
@@ -133,12 +135,12 @@ struct UICreator {
         stackView.spacing = spacing
         return stackView
     }
-//
+
 //    func makeLabelStack(leadingText: String,
 //                        trailingText: String,
-//                        textColor: UIColor = .bbdbBlack,
-//                        backgroundColor: UIColor = .bbdbGreen,
-//                        intersectionColor: UIColor = .bbdbBrown
+//                        textColor: UIColor = .iecCream,
+//                        backgroundColor: UIColor = .iecPurple,
+//                        intersectionColor: UIColor = .iecPurpleLight
 //    ) -> UIStackView {
 //        let stackView = makeStackView(axis: .horizontal,
 //                                      alignment: .fill,
@@ -147,10 +149,10 @@ struct UICreator {
 //        stackView.layer.borderWidth = 2
 //        stackView.layer.borderColor = intersectionColor.cgColor
 //        stackView.addArrangedSubview(makeLabel(text: leadingText,
-//                                               font: UIFont.appFont(.empty, withSize: 23),
+//                                               font: UIFont.appFont(.bold, withSize: 23),
 //                                               color: textColor))
 //        stackView.addArrangedSubview(makeLabel(text: trailingText,
-//                                               font: UIFont.appFont(.filled, withSize: 23),
+//                                               font: UIFont.appFont(.bold, withSize: 23),
 //                                               color: textColor,
 //                                               alignment: .left))
 //        return stackView

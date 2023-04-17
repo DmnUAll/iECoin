@@ -20,7 +20,7 @@ final class LoginScreenView: UIView {
     private let stackView = UICreator.shared.makeStackView(alignment: .center, addingSpacing: 16)
     let loginTextField = UICreator.shared.makeTextField(withPlacegolder: "LOGIN".localized)
     let passwordTextField = UICreator.shared.makeTextField(withPlacegolder: "PASSWORD".localized, isSecured: true)
-    let errorLabel = UICreator.shared.makeLabel(text: "LOGIN_ERROR".localized)
+    let errorLabel = UICreator.shared.makeLabel(text: "LOGIN_ERROR".localized, color: .iecRed)
     let loginButton = UICreator.shared.makeButton(withTitle: "LOG_IN".localized,
                                                   andAction: #selector(loginButtonTapped))
 

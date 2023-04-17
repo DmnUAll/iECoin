@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6108B7A629EC1FE400914AAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6108B7A829EC1FE400914AAA /* Localizable.strings */; };
 		6108B7AB29EC29D900914AAA /* UnwrappedECoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108B7AA29EC29D900914AAA /* UnwrappedECoin.swift */; };
+		6108B7B129ED453000914AAA /* CoinDetailsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108B7B029ED453000914AAA /* CoinDetailsScreenView.swift */; };
+		6108B7B329ED4C2700914AAA /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108B7B229ED4C2700914AAA /* Double+Extensions.swift */; };
+		6108B7B529ED57D400914AAA /* CoinDetailsScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108B7B429ED57D400914AAA /* CoinDetailsScreenController.swift */; };
+		6108B7B729ED582500914AAA /* CoinDetailsScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6108B7B629ED582500914AAA /* CoinDetailsScreenPresenter.swift */; };
 		610D8C8129EACE6A005C3C83 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D8C8029EACE6A005C3C83 /* LoginScreenView.swift */; };
 		610D8C8329EAD388005C3C83 /* LoginScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D8C8229EAD388005C3C83 /* LoginScreenController.swift */; };
 		610D8C8529EAD3BB005C3C83 /* LoginScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D8C8429EAD3BB005C3C83 /* LoginScreenPresenter.swift */; };
@@ -45,6 +49,10 @@
 		6108B7A729EC1FE400914AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6108B7A929EC200500914AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6108B7AA29EC29D900914AAA /* UnwrappedECoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwrappedECoin.swift; sourceTree = "<group>"; };
+		6108B7B029ED453000914AAA /* CoinDetailsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsScreenView.swift; sourceTree = "<group>"; };
+		6108B7B229ED4C2700914AAA /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		6108B7B429ED57D400914AAA /* CoinDetailsScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsScreenController.swift; sourceTree = "<group>"; };
+		6108B7B629ED582500914AAA /* CoinDetailsScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsScreenPresenter.swift; sourceTree = "<group>"; };
 		610D8C8029EACE6A005C3C83 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		610D8C8229EAD388005C3C83 /* LoginScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenController.swift; sourceTree = "<group>"; };
 		610D8C8429EAD3BB005C3C83 /* LoginScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenPresenter.swift; sourceTree = "<group>"; };
@@ -90,6 +98,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6108B7AC29ED44F000914AAA /* CoinDetailsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6108B7AF29ED450C00914AAA /* View */,
+				6108B7AE29ED450500914AAA /* Controller */,
+				6108B7AD29ED44FF00914AAA /* Presenter */,
+			);
+			path = CoinDetailsScreen;
+			sourceTree = "<group>";
+		};
+		6108B7AD29ED44FF00914AAA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6108B7B629ED582500914AAA /* CoinDetailsScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6108B7AE29ED450500914AAA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6108B7B429ED57D400914AAA /* CoinDetailsScreenController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6108B7AF29ED450C00914AAA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6108B7B029ED453000914AAA /* CoinDetailsScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		610D8C7C29EACCE3005C3C83 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +241,7 @@
 				6122F85129EABD7700E0EEA0 /* SplashScreen */,
 				610D8C7C29EACCE3005C3C83 /* LoginScreen */,
 				610D8C9B29EBF4A9005C3C83 /* CoinsListScreen */,
+				6108B7AC29ED44F000914AAA /* CoinDetailsScreen */,
 				6122F84C29EABBF300E0EEA0 /* SupportingFiles */,
 			);
 			path = iECoin;
@@ -244,6 +287,7 @@
 				610D8C9529EBE2B2005C3C83 /* UIImage+Extensions.swift */,
 				610D8C9929EBF31C005C3C83 /* UIApplication+Extensions.swift */,
 				610D8CBC29EC15E8005C3C83 /* String+Extensions.swift */,
+				6108B7B229ED4C2700914AAA /* Double+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -381,12 +425,15 @@
 				610D8CA729EBFA2F005C3C83 /* CoinsScreenListPresenter.swift in Sources */,
 				6122F86129EAC03E00E0EEA0 /* UICreator.swift in Sources */,
 				610D8CA229EBF676005C3C83 /* CoinInfoCell.swift in Sources */,
+				6108B7B729ED582500914AAA /* CoinDetailsScreenPresenter.swift in Sources */,
 				610D8C9A29EBF31C005C3C83 /* UIApplication+Extensions.swift in Sources */,
+				6108B7B129ED453000914AAA /* CoinDetailsScreenView.swift in Sources */,
 				6122F85C29EABF5800E0EEA0 /* UIView+Extensions.swift in Sources */,
 				610D8CA529EBF9B3005C3C83 /* CoinsListScreenController.swift in Sources */,
 				610D8C8529EAD3BB005C3C83 /* LoginScreenPresenter.swift in Sources */,
 				6122F85F29EABFE500E0EEA0 /* SplashScreenPresenter.swift in Sources */,
 				6122F85429EABD8C00E0EEA0 /* SplashScreenController.swift in Sources */,
+				6108B7B529ED57D400914AAA /* CoinDetailsScreenController.swift in Sources */,
 				610D8CAB29EC01CE005C3C83 /* ECoinModel.swift in Sources */,
 				6122F85A29EABEE200E0EEA0 /* UIColor+Extensions.swift in Sources */,
 				610D8C8C29EAD76A005C3C83 /* UIFont+Extensions.swift in Sources */,
@@ -400,6 +447,7 @@
 				6122F83829EABB9100E0EEA0 /* AppDelegate.swift in Sources */,
 				6122F83A29EABB9100E0EEA0 /* SceneDelegate.swift in Sources */,
 				610D8C8129EACE6A005C3C83 /* LoginScreenView.swift in Sources */,
+				6108B7B329ED4C2700914AAA /* Double+Extensions.swift in Sources */,
 				610D8CB429EC08FA005C3C83 /* NetworkClient.swift in Sources */,
 				6122F86329EAC13D00E0EEA0 /* Constants.swift in Sources */,
 				610D8C8329EAD388005C3C83 /* LoginScreenController.swift in Sources */,

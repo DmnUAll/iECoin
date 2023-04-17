@@ -25,13 +25,20 @@ final class CoinsListScreenPresenter {
 extension CoinsListScreenPresenter {
 
     private func convert(_ eCoinModel: ECoinModel) -> UnwrappedECoin {
-        return UnwrappedECoin(name: eCoinModel.data.name,
-                              shortName: eCoinModel.data.symbol,
-                              price: eCoinModel.data.marketData.priceUsd ?? 0.0,
-                              percentChanges: eCoinModel.data.marketData.percentChangeUsdLast24Hours ?? 0.0)
+        UnwrappedECoin(id: eCoinModel.data.id,
+                       name: eCoinModel.data.name,
+                       shortName: eCoinModel.data.symbol,
+                       miningAlgorithm: eCoinModel.data.miningStats.miningAlgo ?? "NO_DATA".localized,
+                       priceUsd: eCoinModel.data.marketData.priceUsd ?? 0.0,
+                       priceBtc: eCoinModel.data.marketData.priceBtc ?? 0.0,
+                       priceEth: eCoinModel.data.marketData.priceEth ?? 0.0,
+                       percentChangesUsd: eCoinModel.data.marketData.percentChangeUsdLast24Hours ?? 0.0,
+                       percentChangesBtc: eCoinModel.data.marketData.percentChangeBtcLast24Hours ?? 0.0,
+                       percentChangesEth: eCoinModel.data.marketData.percentChangeEthLast24Hours ?? 0.0)
     }
 
     func loadData() {
+        eCoinsData = []
         let dispatchGroup = DispatchGroup()
         ECoinsKeys.allCases.forEach { coinKey in
             dispatchGroup.enter()
@@ -50,9 +57,45 @@ extension CoinsListScreenPresenter {
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            print(eCoinsData)
-            print(eCoinsData.count)
             self.viewController?.showOrHideUI()
+        }
+    }
+
+    func giveNumberOfRows() -> Int {
+        eCoinsData.count
+    }
+
+    func configureCell(forIndexPath indexPath: IndexPath, at tableVlew: UITableView) -> UITableViewCell {
+        guard let cell = tableVlew.dequeueReusableCell(withIdentifier: K.CellsIdentifiers.coinInfo,
+                                                       for: indexPath) as? CoinInfoCell else {
+            return UITableViewCell()
+        }
+        let coin = eCoinsData[indexPath.row]
+        let noData = coin.priceUsd == 0.0
+        cell.coinImage.image = UIImage(named: coin.name.lowercased())
+        cell.coinNameLabel.text = "\(coin.shortName) (\(coin.name))"
+        cell.coinPriceLabel.text = noData ? "NO_DATA".localized : "\(coin.priceUsd.shortDouble()) $"
+        cell.coinDailyPriceLabel.text = noData ? "NO_DATA".localized : "(\(coin.percentChangesUsd.shortDouble()) %)"
+        if coin.percentChangesUsd > 0 {
+            cell.coinDailyPriceLabel.textColor = .iecGreen
+        } else if coin.percentChangesUsd < 0 {
+            cell.coinDailyPriceLabel.textColor = .iecRed
+        } else {
+            cell.coinDailyPriceLabel.textColor = .iecCream
+        }
+        return cell
+    }
+
+    func giveData(for indexPath: IndexPath) -> UnwrappedECoin {
+        eCoinsData[indexPath.row]
+    }
+
+    func sortList(withDirection direction: SortingDirections) {
+        switch direction {
+        case .decrementByDailyPrice:
+            eCoinsData.sort { $0.percentChangesUsd > $1.percentChangesUsd }
+        case .incrementByDailyPrice:
+            eCoinsData.sort { $0.percentChangesUsd < $1.percentChangesUsd }
         }
     }
 }

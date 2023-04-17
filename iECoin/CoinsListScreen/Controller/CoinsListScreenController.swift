@@ -27,6 +27,9 @@ final class CoinsListScreenController: UIViewController {
         setupConstraints()
         showOrHideUI()
         presenter = CoinsListScreenPresenter(viewController: self)
+        coinsListScreenView.tableView.dataSource = self
+        coinsListScreenView.tableView.delegate = self
+        (navigationController as? NavigationController)?.sortingDelegate = self
     }
 }
 
@@ -49,6 +52,7 @@ extension CoinsListScreenController {
     func showOrHideUI() {
         if coinsListScreenView.activityIndicator.isAnimating {
             coinsListScreenView.activityIndicator.stopAnimating()
+            coinsListScreenView.tableView.reloadData()
             coinsListScreenView.tableView.isHidden = false
         } else {
             coinsListScreenView.activityIndicator.startAnimating()
@@ -71,5 +75,33 @@ extension CoinsListScreenController {
 }
 
 // MARK: - UITableViewDataSource
+extension CoinsListScreenController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter?.giveNumberOfRows() ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        presenter?.configureCell(forIndexPath: indexPath, at: tableView) ?? UITableViewCell()
+    }
+}
 
 // MARK: - UITableViewDelegate
+extension CoinsListScreenController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let coinData = presenter?.giveData(for: indexPath) else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
+        let nextVC = CoinDetailsScreenController(coinData: coinData)
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+// MARK: - SortingDelegate
+extension CoinsListScreenController: SortingDelegate {
+
+    func sortItems(using sortingDirection: SortingDirections) {
+        presenter?.sortList(withDirection: sortingDirection)
+        coinsListScreenView.tableView.reloadData()
+    }
+}

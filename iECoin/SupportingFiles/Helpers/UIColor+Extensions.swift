@@ -10,6 +10,7 @@ import UIKit
 extension UIColor {
 
     static var iecCream: UIColor { UIColor(named: "IEC Cream") ?? .red }
+    static var iecGreen: UIColor { UIColor(named: "IEC Green") ?? .red }
     static var iecPurpleDark: UIColor { UIColor(named: "IEC Purple Dark") ?? .red }
     static var iecPurple: UIColor { UIColor(named: "IEC Purple") ?? .red }
     static var iecPurpleLight: UIColor { UIColor(named: "IEC Purple Light") ?? .red }
