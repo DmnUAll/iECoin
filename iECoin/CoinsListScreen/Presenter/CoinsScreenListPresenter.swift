@@ -23,11 +23,7 @@ final class CoinsListScreenPresenter {
         self.viewController = viewController
         loadData()
         // The coinData updating time can be increased if there'll be more genereous requests limit
-        timer = Timer.scheduledTimer(timeInterval: 120.0,
-                                     target: self,
-                                     selector: #selector(updateECoinsData),
-                                     userInfo: nil,
-                                     repeats: true)
+        beginBringingUpdates(timeInterval: 120)
     }
 }
 
@@ -37,6 +33,14 @@ extension CoinsListScreenPresenter {
     @objc private func updateECoinsData() {
         print(#function)
         loadData()
+    }
+
+    private func beginBringingUpdates(timeInterval: Double) {
+        timer = Timer.scheduledTimer(timeInterval: timeInterval,
+                                     target: self,
+                                     selector: #selector(updateECoinsData),
+                                     userInfo: nil,
+                                     repeats: true)
     }
 
     private func convert(_ eCoinModel: ECoinModel) -> UnwrappedECoin {
