@@ -31,7 +31,6 @@ final class CoinsListScreenPresenter {
 extension CoinsListScreenPresenter {
 
     @objc private func updateECoinsData() {
-        print(#function)
         loadData()
     }
 
