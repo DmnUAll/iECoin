@@ -10,8 +10,9 @@ import Foundation
 // MARK: - NetworkClient
 struct NetworkClient {
 
-    private enum NetworkError: Error {
+    enum NetworkError: Error {
         case codeError
+        case requestsLimitError
     }
 
     func fetch(url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
@@ -22,8 +23,12 @@ struct NetworkClient {
                 return
             }
             if let response = response as? HTTPURLResponse,
-                response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.codeError))
+               response.statusCode < 200 || response.statusCode >= 300 {
+                if response.statusCode == 429 {
+                    handler(.failure(NetworkError.requestsLimitError))
+                } else {
+                    handler(.failure(NetworkError.codeError))
+                }
                 return
             }
             guard let data = data else { return }

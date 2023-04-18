@@ -12,6 +12,7 @@ final class CoinsListScreenView: UIView {
 
     // MARK: - Properties and Initializers
     let activityIndicator = UICreator.shared.makeActivityIndicator(withColor: .iecCream)
+    let searchTextField = UICreator.shared.makeSearchTextField()
     let tableView = UICreator.shared.makeTable(withCells: (type: CoinInfoCell.self,
                                                            identifier: K.CellsIdentifiers.coinInfo))
 
@@ -34,11 +35,13 @@ extension CoinsListScreenView {
     private func configureLayout() {
         toAutolayout()
         activityIndicator.toAutolayout()
+        searchTextField.toAutolayout()
         tableView.toAutolayout()
     }
 
     private func addSubviews() {
         addSubview(activityIndicator)
+        addSubview(searchTextField)
         addSubview(tableView)
     }
 
@@ -46,8 +49,11 @@ extension CoinsListScreenView {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            searchTextField.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchTextField.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 4),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])

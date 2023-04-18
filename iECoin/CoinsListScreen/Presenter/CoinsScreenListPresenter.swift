@@ -14,15 +14,30 @@ final class CoinsListScreenPresenter {
     private weak var viewController: CoinsListScreenController?
     private let coinDataLoader = NetworkDataLoader()
     private var eCoinsData: [UnwrappedECoin] = []
+    private var eCoinsManipulatedData: [UnwrappedECoin] = []
+    private var sortingDirection: SortingDirections?
+    private var currentFilterParameter: String = ""
+    private var timer: Timer?
 
     init(viewController: CoinsListScreenController? = nil) {
         self.viewController = viewController
         loadData()
+        // The coinData updating time can be increased if there'll be more genereous requests limit
+        timer = Timer.scheduledTimer(timeInterval: 120.0,
+                                     target: self,
+                                     selector: #selector(updateECoinsData),
+                                     userInfo: nil,
+                                     repeats: true)
     }
 }
 
 // MARK: - Helpers
 extension CoinsListScreenPresenter {
+
+    @objc private func updateECoinsData() {
+        print(#function)
+        loadData()
+    }
 
     private func convert(_ eCoinModel: ECoinModel) -> UnwrappedECoin {
         UnwrappedECoin(id: eCoinModel.data.id,
@@ -50,19 +65,26 @@ extension CoinsListScreenPresenter {
                         eCoinsData.append(convert(eCoinData))
                         dispatchGroup.leave()
                     case .failure(let error):
-                        self.viewController?.showNetworkError(message: error.localizedDescription)
+                        if let error = error as? NetworkClient.NetworkError,
+                           error == .requestsLimitError {
+                            self.viewController?.showNetworkError(message: "REQUESTS_LIMIT_REACHED".localized)
+                        } else {
+                            self.viewController?.showNetworkError(message: error.localizedDescription)
+                        }
                     }
                 }
             }
         }
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            self.viewController?.showOrHideUI()
+            eCoinsManipulatedData = eCoinsData
+            filterList(byCoinName: currentFilterParameter)
+            self.viewController?.showUI()
         }
     }
 
     func giveNumberOfRows() -> Int {
-        eCoinsData.count
+        eCoinsManipulatedData.count
     }
 
     func configureCell(forIndexPath indexPath: IndexPath, at tableVlew: UITableView) -> UITableViewCell {
@@ -70,7 +92,7 @@ extension CoinsListScreenPresenter {
                                                        for: indexPath) as? CoinInfoCell else {
             return UITableViewCell()
         }
-        let coin = eCoinsData[indexPath.row]
+        let coin = eCoinsManipulatedData[indexPath.row]
         let noData = coin.priceUsd == 0.0
         cell.coinImage.image = UIImage(named: coin.name.lowercased())
         cell.coinNameLabel.text = "\(coin.shortName) (\(coin.name))"
@@ -93,9 +115,27 @@ extension CoinsListScreenPresenter {
     func sortList(withDirection direction: SortingDirections) {
         switch direction {
         case .decrementByDailyPrice:
-            eCoinsData.sort { $0.percentChangesUsd > $1.percentChangesUsd }
+            sortingDirection = .decrementByDailyPrice
+            eCoinsManipulatedData.sort { $0.percentChangesUsd > $1.percentChangesUsd }
         case .incrementByDailyPrice:
-            eCoinsData.sort { $0.percentChangesUsd < $1.percentChangesUsd }
+            sortingDirection = .incrementByDailyPrice
+            eCoinsManipulatedData.sort { $0.percentChangesUsd < $1.percentChangesUsd }
         }
+        viewController?.reloadTable()
+    }
+
+    func filterList(byCoinName coinName: String) {
+        currentFilterParameter = coinName
+        if coinName == "" {
+            eCoinsManipulatedData = eCoinsData
+        } else {
+            eCoinsManipulatedData = eCoinsData.filter { coin in
+                coin.name.lowercased().hasPrefix(coinName.lowercased())
+            }
+        }
+        if let sortingDirection {
+            sortList(withDirection: sortingDirection)
+        }
+        viewController?.reloadTable()
     }
 }

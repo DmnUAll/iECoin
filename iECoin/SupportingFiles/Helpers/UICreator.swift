@@ -82,6 +82,7 @@ struct UICreator {
         tableView.backgroundColor = .clear
         tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tableView
     }
 
@@ -91,36 +92,26 @@ struct UICreator {
         activityIndicator.color = color
         return activityIndicator
     }
-//
-//    func makeSearchBar() -> UISearchBar {
-//        let searchBar = UISearchBar()
-//        searchBar.toAutolayout()
-//        searchBar.barTintColor = .bbdbBlue
-//        searchBar.backgroundImage = UIImage()
-//        return searchBar
-//    }
-//
-//    func makePageControll() -> UIPageControl {
-//        let pageControl = UIPageControl()
-//        pageControl.toAutolayout()
-//        pageControl.isEnabled = false
-//        pageControl.backgroundColor = .clear
-//        pageControl.currentPageIndicatorTintColor = .bbdbRed
-//        pageControl.pageIndicatorTintColor = .bbdbRed.withAlphaComponent(0.3)
-//        pageControl.numberOfPages = 5
-//        return pageControl
-//    }
-//
-//    func makeSwitch(withAction action: Selector, andCurrentState state: Bool) -> UISwitch {
-//        let uiSwitch = UISwitch()
-//        uiSwitch.toAutolayout()
-//        uiSwitch.isOn = state
-//        uiSwitch.addTarget(nil, action: action, for: UIControl.Event.valueChanged)
-//        uiSwitch.onTintColor = .bbdbBlack
-//        uiSwitch.thumbTintColor = .bbdbWhite
-//        return uiSwitch
-//    }
-//
+
+    func makeSearchTextField() -> UISearchTextField {
+        let searchField = UISearchTextField()
+        searchField.placeholder = "SEARCH".localized
+        searchField.backgroundColor = .iecPurple.withAlphaComponent(0.12)
+        searchField.textColor = .iecCream
+        searchField.attributedPlaceholder = NSAttributedString(
+            string: searchField.placeholder ?? "",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.iecPurpleLight
+            ]
+        )
+        if let leftView = searchField.leftView as? UIImageView {
+            leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
+            leftView.tintColor = UIColor.iecPurpleLight
+        }
+        searchField.clearButtonMode = .never
+        return searchField
+    }
+
     func makeStackView(axis: NSLayoutConstraint.Axis = .vertical,
                        alignment: UIStackView.Alignment = .fill,
                        distribution: UIStackView.Distribution = .fill,
@@ -135,52 +126,4 @@ struct UICreator {
         stackView.spacing = spacing
         return stackView
     }
-
-//    func makeLabelStack(leadingText: String,
-//                        trailingText: String,
-//                        textColor: UIColor = .iecCream,
-//                        backgroundColor: UIColor = .iecPurple,
-//                        intersectionColor: UIColor = .iecPurpleLight
-//    ) -> UIStackView {
-//        let stackView = makeStackView(axis: .horizontal,
-//                                      alignment: .fill,
-//                                      distribution: .fillEqually,
-//                                      backgroundColor: backgroundColor)
-//        stackView.layer.borderWidth = 2
-//        stackView.layer.borderColor = intersectionColor.cgColor
-//        stackView.addArrangedSubview(makeLabel(text: leadingText,
-//                                               font: UIFont.appFont(.bold, withSize: 23),
-//                                               color: textColor))
-//        stackView.addArrangedSubview(makeLabel(text: trailingText,
-//                                               font: UIFont.appFont(.bold, withSize: 23),
-//                                               color: textColor,
-//                                               alignment: .left))
-//        return stackView
-//    }
-//
-//    func makeScrollView() -> UIScrollView {
-//        let scrollView = UIScrollView()
-//        scrollView.toAutolayout()
-//        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * 5, height: 0)
-//        scrollView.isPagingEnabled = true
-//        scrollView.showsHorizontalScrollIndicator = false
-//        return scrollView
-//    }
-//
-//    func makeTextViewWithLink() -> UITextView {
-//        let attributedString = NSMutableAttributedString(string: "This app was made, using bobsburgersapi.com API")
-//        attributedString.addAttribute(.link,
-//                                      value: "https://www.bobsburgersapi.com",
-//                                      range: NSRange(location: 25, length: 18))
-//        let textView = UITextView()
-//        textView.toAutolayout()
-//        textView.backgroundColor = .clear
-//        textView.attributedText = attributedString
-//        textView.textAlignment = .center
-//        textView.font = UIFont(name: "Kailasa Bold", size: 12)
-//        textView.textColor = .bbdbBlack
-//        textView.isEditable = false
-//        textView.dataDetectorTypes = .link
-//        return textView
-//    }
 }

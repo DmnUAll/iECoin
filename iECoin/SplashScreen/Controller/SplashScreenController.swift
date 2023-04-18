@@ -24,9 +24,9 @@ final class SplashScreenController: UIViewController {
         addSubviews()
         setupConstraints()
         /*
-        .asyncAfter was added to test the SplashScreen visibility.
-        If not needed - move the line from completion to viewDidAppear() method
-        */
+         .asyncAfter was added to test the SplashScreen visibility.
+         If not needed - move the line from completion to viewDidAppear() method
+         */
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self else { return }
             self.presenter = SplashScreenPresenter(viewController: self)

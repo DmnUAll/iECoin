@@ -25,8 +25,9 @@ final class CoinsListScreenController: UIViewController {
         title = "COINS_LIST".localized
         addSubviews()
         setupConstraints()
-        showOrHideUI()
+        hideUI()
         presenter = CoinsListScreenPresenter(viewController: self)
+        coinsListScreenView.searchTextField.delegate = self
         coinsListScreenView.tableView.dataSource = self
         coinsListScreenView.tableView.delegate = self
         (navigationController as? NavigationController)?.sortingDelegate = self
@@ -49,15 +50,15 @@ extension CoinsListScreenController {
         ])
     }
 
-    func showOrHideUI() {
-        if coinsListScreenView.activityIndicator.isAnimating {
-            coinsListScreenView.activityIndicator.stopAnimating()
-            coinsListScreenView.tableView.reloadData()
-            coinsListScreenView.tableView.isHidden = false
-        } else {
-            coinsListScreenView.activityIndicator.startAnimating()
-            coinsListScreenView.tableView.isHidden = true
-        }
+    func hideUI() {
+        coinsListScreenView.activityIndicator.startAnimating()
+        coinsListScreenView.tableView.isHidden = true
+    }
+
+    func showUI() {
+        coinsListScreenView.activityIndicator.stopAnimating()
+        reloadTable()
+        coinsListScreenView.tableView.isHidden = false
     }
 
     func showNetworkError(message: String) {
@@ -71,6 +72,30 @@ extension CoinsListScreenController {
         }
         alertModel.addAction(tryAgainAction)
         present(alertModel, animated: true)
+    }
+
+    func reloadTable() {
+        coinsListScreenView.tableView.reloadData()
+    }
+}
+
+// MARK: - UISearchTextFieldDelegate
+extension CoinsListScreenController: UISearchTextFieldDelegate {
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String
+    ) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        presenter?.filterList(byCoinName: updatedText)
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 
@@ -102,6 +127,5 @@ extension CoinsListScreenController: SortingDelegate {
 
     func sortItems(using sortingDirection: SortingDirections) {
         presenter?.sortList(withDirection: sortingDirection)
-        coinsListScreenView.tableView.reloadData()
     }
 }
