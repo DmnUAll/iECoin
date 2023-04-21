@@ -112,7 +112,7 @@ extension CoinsListScreenPresenter {
     }
 
     func giveData(for indexPath: IndexPath) -> UnwrappedECoin {
-        eCoinsData[indexPath.row]
+        eCoinsManipulatedData[indexPath.row]
     }
 
     func sortList(withDirection direction: SortingDirections) {
