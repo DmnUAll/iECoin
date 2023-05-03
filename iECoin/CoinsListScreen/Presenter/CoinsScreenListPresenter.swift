@@ -90,8 +90,8 @@ extension CoinsListScreenPresenter {
         eCoinsManipulatedData.count
     }
 
-    func configureCell(forIndexPath indexPath: IndexPath, at tableVlew: UITableView) -> UITableViewCell {
-        guard let cell = tableVlew.dequeueReusableCell(withIdentifier: K.CellsIdentifiers.coinInfo,
+    func configureCell(forIndexPath indexPath: IndexPath, at tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.CellsIdentifiers.coinInfo,
                                                        for: indexPath) as? CoinInfoCell else {
             return UITableViewCell()
         }
