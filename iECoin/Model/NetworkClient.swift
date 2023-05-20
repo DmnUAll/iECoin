@@ -11,6 +11,7 @@ import Foundation
 struct NetworkClient {
 
     enum NetworkError: Error {
+
         case codeError
         case requestsLimitError
     }

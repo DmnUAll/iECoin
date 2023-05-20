@@ -8,6 +8,7 @@
 import Foundation
 
 struct UnwrappedECoin {
+
     let id: String
     let name: String
     let shortName: String

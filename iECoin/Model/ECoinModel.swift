@@ -9,16 +9,19 @@ import Foundation
 
 // MARK: - ECoinModel
 struct ECoinModel: Codable {
+
     let data: ECoinData
 }
 
 // MARK: - ECoinData
 struct ECoinData: Codable {
+
     let id, symbol, name: String
     let marketData: MarketData
     let miningStats: MiningStats
 
     enum CodingKeys: String, CodingKey {
+
         case id, symbol, name
         case marketData = "market_data"
         case miningStats = "mining_stats"
@@ -27,10 +30,12 @@ struct ECoinData: Codable {
 
 // MARK: - MarketData
 struct MarketData: Codable {
+
     let priceUsd, priceBtc, priceEth: Double?
     let percentChangeUsdLast24Hours, percentChangeBtcLast24Hours, percentChangeEthLast24Hours: Double?
 
     enum CodingKeys: String, CodingKey {
+
         case priceUsd = "price_usd"
         case priceBtc = "price_btc"
         case priceEth = "price_eth"
@@ -42,9 +47,11 @@ struct MarketData: Codable {
 
 // MARK: - MiningStats
 struct MiningStats: Codable {
+
     let miningAlgo: String?
 
     enum CodingKeys: String, CodingKey {
+
         case miningAlgo = "mining_algo"
     }
 }

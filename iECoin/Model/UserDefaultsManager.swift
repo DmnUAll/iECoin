@@ -13,6 +13,7 @@ final class UserDefaultsManager {
     static var shared = UserDefaultsManager()
 
     private enum Keys: String {
+
         case loggedIn
     }
 
